@@ -31,7 +31,7 @@ steps:
       - release/terraform-credentials-env_*.tar.gz
       - release/terraform-credentials-env_checksums.txt
     api_key:
-      from_secret: github_token
+      from_secret: api_key
   when:
     event: tag
 
