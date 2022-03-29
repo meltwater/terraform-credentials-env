@@ -18,7 +18,7 @@ steps:
   image: golang:1.12
   commands:
   - tar -cvzf release/terraform-credentials-env_linux_amd64.tar.gz -C release/linux/amd64 terraform-credentials-env
-  - sha256sum release/*.tar.gz > release/terraform-credentials-env_checksums.txt
+  - sha256sum release/*.tar.gz > terraform-credentials-env_checksums.txt
   when:
     event:
     - push
