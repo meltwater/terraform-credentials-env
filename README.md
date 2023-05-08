@@ -1,5 +1,13 @@
 # Terraform Credentials from the Environment
 
+## Maintainers
+
+This repository is owned and maintained by Foundation Missions A-Team.  Should you encounter issues or require changes to code maintained in this repository, please reachout in `#foundation-mission` or one of our service channels in slack.
+
+* [#foundation-mission](https://meltwater.slack.com/archives/CATUVU820)
+* [a-team@meltwater.com](mailto:a-team@meltwater.com)
+* @meltwater/a-team
+
 `terraform-credentials-env` is a Terraform "credentials helper" plugin that
 allows providing credentials for
 [Terraform-native services](https://www.terraform.io/docs/internals/remote-service-discovery.html)
