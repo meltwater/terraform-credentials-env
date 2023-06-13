@@ -3,7 +3,7 @@ type: docker
 name: default
 
 steps:
-- name: build
+- name: build-amd64
   image: golang:1.12
   commands:
   - apt update && apt install ca-certificates libgnutls30 -y
@@ -14,7 +14,7 @@ steps:
     - pull_request
     - tag
 
-- name: artifacts
+- name: artifacts-amd64
   image: golang:1.12
   commands:
   - tar -cvzf release/terraform-credentials-env_linux_amd64.tar.gz -C release/linux/amd64 terraform-credentials-env
@@ -23,7 +23,27 @@ steps:
     event:
     - push
     - tag
+    
+- name: build-arm64
+  image: golang:1.12
+  commands:
+  - apt update && apt install ca-certificates libgnutls30 -y
+  - CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "-X main.version=${DRONE_TAG##v}" -o release/linux/amd64/terraform-credentials-env
+  when:
+    event:
+    - push
+    - pull_request
+    - tag
 
+- name: artifacts-arm64
+  image: golang:1.12
+  commands:
+  - tar -cvzf release/terraform-credentials-env_linux_arm64.tar.gz -C release/linux/arm64 terraform-credentials-env
+  - sha256sum release/*.tar.gz >> release/terraform-credentials-env_checksums.txt
+  when:
+    event:
+    - push
+    - tag
 - name: release
   image: plugins/github-release
   settings:
