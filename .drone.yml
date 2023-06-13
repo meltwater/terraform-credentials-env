@@ -2,6 +2,13 @@ kind: pipeline
 type: docker
 name: default
 
+trigger:
+  ref:
+    include:
+    - refs/heads/master
+    - refs/pull/**
+    - refs/tags/**
+
 steps:
 - name: build-amd64
   image: golang:1.12
@@ -54,10 +61,3 @@ steps:
       from_secret: api_key
   when:
     event: tag
-
-trigger:
-  ref:
-    include:
-    - refs/heads/master
-    - refs/pull/**
-    - refs/tags/**
